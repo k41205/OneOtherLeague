@@ -4,7 +4,7 @@ It's a simple web app relying on Riot APIs to fetch data and render them on a la
 
 You can give a look at it here:
 
-[Neeko app](https://oneotherleague.netlify.app/ 'Homepage')
+[OneOtherLeague](https://oneotherleague.netlify.app/ 'Homepage')
 
 Hosted on Netlify with automated CI/CD:
 
