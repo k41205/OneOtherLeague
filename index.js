@@ -1,29 +1,5 @@
 'use strict';
 
-/* TODO:
-- reorganize code in modules
-- implement try-catch to manage errors and discard promise when rejected
-- make unavailable search till the autocomplete function is ready
-
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCaHjS973LOXtQK8nZL8uXok5bx4gZYeN4",
-  authDomain: "one-other-league.firebaseapp.com",
-  projectId: "one-other-league",
-  storageBucket: "one-other-league.appspot.com",
-  messagingSenderId: "929970509195",
-  appId: "1:929970509195:web:961c4b0f293a0f54908b8e"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-*/
-
 // FUNCTIONS
 //////////////////////////////
 
@@ -54,16 +30,21 @@ class Card {
 
   static deck = [];
 
-  // TODO: implement try-catch
   async init(champ) {
-    this.champ = await this.initChamp(champ);
-    this.htmlStr = this.initHtml(this.champ); //make this html a DOM element so it would be easier to manage
-    this.html = stringToHtmlElement(this.htmlStr);
-    // const a = new DOMParser();
-    // this.html = a.parseFromString(str, 'text/html');
-    // let a = document.createElement('article')
-    // a.classList.add('card')
-    // a.setAttribute('data-id',this.id)
+    try {
+      this.champ = await this.initChamp(champ);
+      this.htmlStr = this.initHtml(this.champ); //make this html a DOM element so it would be easier to manage
+      this.html = stringToHtmlElement(this.htmlStr);
+
+      // To make that html a DOM element I can use the DOMParser()
+      // const a = new DOMParser();
+      // this.html = a.parseFromString(str, 'text/html');
+      // let a = document.createElement('article')
+      // a.classList.add('card')
+      // a.setAttribute('data-id',this.id)
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async initChamp(champ) {
@@ -127,7 +108,6 @@ class Card {
   }
 
   addDeck = function () {
-    // this.html add class pin-down
     this.id = Date.now();
     this.html.setAttribute('data-id', this.id);
     this.html.firstElementChild.classList.remove('card__pin--up');
@@ -154,8 +134,7 @@ const showercase = document.querySelector('.showercase');
 // Data vars
 let champNames;
 let newCard;
-// const test = new Card('Ashe');
-// Card.deck.push(test);
+
 // Fetching data to fill autocomplete db
 (async function () {
   try {
@@ -171,13 +150,11 @@ let newCard;
 
 // Event Listener Delegator
 document.addEventListener('click', (e) => {
-  // e.stopImmediatePropagation();
   // Manage the digit on the search list component
   if (e.target === searchInput) {
     searchInput.addEventListener('input', (ev) => {
       // To avoid to trigger again the event passed by main event listener into this one.
       // To see what happen just comment the next command and uncomment the next to it.
-      // What difference between stopPropagation and stopImmediatePropagation??
       ev.stopImmediatePropagation();
       // console.log(e.clientY);
       let matchedItems = autocompleteMatch(searchInput.value, champNames);

@@ -13,7 +13,6 @@ TYPOGRAPHY RULES
 H1: 24px bold
 H2: 20px italic
 H3: 18px uppercase
-
 */
 
 /* RESET */
@@ -120,10 +119,6 @@ input {
   padding-bottom: 1.5px;
   border: none;
   color: #fff;
-
-  /* transform: translateY(-40px);
-  opacity: 0;
-  animation: start 0.5s 0.5s ease-out forwards; */
 }
 
 .search__input:focus-visible {
@@ -163,15 +158,6 @@ input {
 .search__result {
   height: 462px;
 }
-
-/* .search__collection::-webkit-scrollbar {
-  background-color: aqua;
-  scrollbar-width: thin;
-}
-
-.search__collection::-webkit-scrollbar-thumb {
-  background-color: blue;
-} */
 
 /* CARD COMPONENT */
 
@@ -253,8 +239,6 @@ input {
 
 .search__result.unload {
   animation: fadeOutDown 0.2s ease-out forwards;
-  /* opacity: 0;
-  visibility: hidden; */
 }
 
 /* ANIMATIONS */
